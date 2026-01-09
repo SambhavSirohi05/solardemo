@@ -140,6 +140,30 @@ const Interface = ({ currentFocus, onPlanetSelect, onZoom, setInteractionDom }) 
                             pointerEvents: 'auto', zIndex: 30
                         }}
                     >
+                        <button
+                            onClick={() => setIsMenuOpen(false)}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                color: 'rgba(255,255,255,0.5)',
+                                fontSize: '0.9rem',
+                                cursor: 'pointer',
+                                textAlign: 'left',
+                                marginBottom: '2rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                letterSpacing: '2px',
+                                textTransform: 'uppercase'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.color = 'white'}
+                            onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            BACK
+                        </button>
                         {planetData.map((p) => (
                             <button
                                 key={p.name}
@@ -182,8 +206,8 @@ const Interface = ({ currentFocus, onPlanetSelect, onZoom, setInteractionDom }) 
                                 height: '100vh',
                                 width: '100%',
                                 position: 'relative',
+                                touchAction: 'pan-y', // CRITICAL: Allows vertical scroll on mobile while swiping!
                                 // We keep auto here to capture clicks for the Back button etc.
-                                // BUT we need to let dragging pass? No, OrbitControls needs a target.
                                 // We are passing this ref AS the target.
                             }}
                         >
