@@ -216,45 +216,120 @@ const Interface = ({ currentFocus, onPlanetSelect, onZoom, setInteractionDom }) 
                         </div>
 
                         {/* CONTENT SECTION */}
+                        {/* CONTENT SECTION */}
                         <div id="planet-content" style={{
                             minHeight: '100vh',
-                            background: 'rgba(5, 5, 5, 0.95)',
-                            backdropFilter: 'blur(20px)',
-                            padding: '4rem 2rem',
-                            borderTop: `2px solid ${currentFocus.color}`,
+                            background: `radial-gradient(circle at 50% 20%, ${currentFocus.color}22, #050505 80%)`, // Dynamic Gradient
+                            backdropFilter: 'blur(20px)', // Helps blend if overlaying anything
+                            padding: '6rem 2rem',
+                            borderTop: `1px solid ${currentFocus.color}44`,
                             position: 'relative',
                             zIndex: 45
                         }}>
-                            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                                <h2 style={{ fontSize: '5rem', margin: '0 0 1rem 0', color: currentFocus.color }}>{currentFocus.name}</h2>
-                                <p style={{ fontSize: '1.5rem', lineHeight: '1.8', marginBottom: '6rem', color: '#eaeaea' }}>
-                                    {currentFocus.description}
-                                </p>
+                            <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                                {/* Header */}
+                                <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                                    <h2 style={{
+                                        fontSize: '6rem',
+                                        margin: '0',
+                                        color: 'white',
+                                        fontWeight: '100', // Thin elegant font
+                                        letterSpacing: '10px',
+                                        textShadow: `0 0 30px ${currentFocus.color}66`
+                                    }}>{currentFocus.name}</h2>
+                                    <div style={{ width: '100px', height: '2px', background: currentFocus.color, margin: '2rem auto' }} />
+                                    <p style={{
+                                        fontSize: '1.2rem',
+                                        lineHeight: '1.8',
+                                        color: '#cccccc',
+                                        maxWidth: '700px',
+                                        margin: '0 auto',
+                                        fontWeight: '300'
+                                    }}>
+                                        {currentFocus.description}
+                                    </p>
+                                </div>
 
-                                <h3 style={{ fontSize: '2rem', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>Planetary Data</h3>
-
+                                {/* HEADLINE DATA */}
                                 {currentFocus.details && (
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '4rem' }}>
-                                        <div>
-                                            <div style={{ fontSize: '0.9rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Surface Temp</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{currentFocus.details.temp}</div>
+                                    <>
+                                        <h3 style={{
+                                            fontSize: '1rem',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '4px',
+                                            color: 'rgba(255,255,255,0.5)',
+                                            marginBottom: '2rem',
+                                            textAlign: 'center'
+                                        }}>Planetary Data</h3>
+
+                                        <div style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                                            gap: '2rem',
+                                            padding: '0 1rem'
+                                        }}>
+                                            {/* TEMP CARD */}
+                                            <div style={cardStyle}>
+                                                <div style={iconContainerStyle}>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                                    </svg>
+                                                </div>
+                                                <div style={labelStyle}>Surface Temp</div>
+                                                <div style={valueStyle}>{currentFocus.details.temp}</div>
+                                            </div>
+
+                                            {/* DAY CARD */}
+                                            <div style={cardStyle}>
+                                                <div style={iconContainerStyle}>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                                        <circle cx="12" cy="12" r="10" />
+                                                        <polyline points="12 6 12 12 16 14" />
+                                                    </svg>
+                                                </div>
+                                                <div style={labelStyle}>Day Length</div>
+                                                <div style={valueStyle}>{currentFocus.details.day}</div>
+                                            </div>
+
+                                            {/* YEAR CARD */}
+                                            <div style={cardStyle}>
+                                                <div style={iconContainerStyle}>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                                    </svg>
+                                                </div>
+                                                <div style={labelStyle}>Year Length</div>
+                                                <div style={valueStyle}>{currentFocus.details.year}</div>
+                                            </div>
+
+                                            {/* DISTANCE CARD */}
+                                            <div style={cardStyle}>
+                                                <div style={iconContainerStyle}>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                                                        <path d="M2.5 7a4.5 4.5 0 0 0 0 9" />
+                                                        <path d="M21.5 7a4.5 4.5 0 0 1 0 9" />
+                                                        <path d="M12 12l9-5" />
+                                                        <path d="M12 12l-9-5" />
+                                                        <path d="M12 12l9 5" />
+                                                        <path d="M12 12l-9 5" />
+                                                    </svg>
+                                                </div>
+                                                <div style={labelStyle}>Distance</div>
+                                                <div style={valueStyle}>{currentFocus.details.distance || currentFocus.distance + ' AU'}</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div style={{ fontSize: '0.9rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Day Length</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{currentFocus.details.day}</div>
-                                        </div>
-                                        <div>
-                                            <div style={{ fontSize: '0.9rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Year Length</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{currentFocus.details.year}</div>
-                                        </div>
-                                        <div>
-                                            <div style={{ fontSize: '0.9rem', opacity: 0.5, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Distance</div>
-                                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{currentFocus.details.distance || currentFocus.distance + ' AU'}</div>
-                                        </div>
-                                    </div>
+                                    </>
                                 )}
 
-                                <div style={{ height: '200px' }} />
+                                <div style={{ height: '150px' }} />
+
+                                {/* Footer */}
+                                <div style={{ textAlign: 'center', opacity: 0.3, fontSize: '0.8rem' }}>
+                                    SOLAR SYSTEM EXPLORER © 2026
+                                </div>
                             </div>
                         </div>
                     </motion.div>
@@ -262,6 +337,47 @@ const Interface = ({ currentFocus, onPlanetSelect, onZoom, setInteractionDom }) 
             </AnimatePresence>
         </div>
     );
+};
+
+// --- STYLES FOR CARDS ---
+const cardStyle = {
+    background: 'rgba(255, 255, 255, 0.03)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '16px',
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    backdropFilter: 'blur(10px)',
+    transition: 'transform 0.3s ease, border-color 0.3s ease',
+    cursor: 'default'
+};
+
+const iconContainerStyle = {
+    width: '50px',
+    height: '50px',
+    background: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '1rem',
+    color: 'white'
+};
+
+const labelStyle = {
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    color: 'rgba(255, 255, 255, 0.5)',
+    marginBottom: '0.5rem'
+};
+
+const valueStyle = {
+    fontSize: '2rem',
+    fontWeight: '600',
+    color: 'white'
 };
 
 export default Interface;
